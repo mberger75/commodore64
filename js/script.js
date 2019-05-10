@@ -1,68 +1,63 @@
-var ctxAudio;
-var osc;
+import C64, {waves} from './C64.js';
 
-const waves = {
-  sine: 'sine',
-  square: 'square',
-  sawtooth: 'sawtooth',
-  triangle: 'triangle'
+function createOsc (wave) {
+    let ctxAudio = new (window.AudioContext || window.webkitAudioContext)();
+    let osc = ctxAudio.createOscillator();
+    osc.type = wave;
+    osc.start();
+    
+    return {ctxAudio, osc};
 }
 
-const createOsc = (wave) => {
-  ctxAudio = new (window.AudioContext || window.webkitAudioContext)();
-  osc = ctxAudio.createOscillator();
-  osc.type = wave;
-  osc.start();
+function playOsc(ctxAudio, osc, freq) {
+    osc.connect(ctxAudio.destination);
+    osc.frequency.value = freq;
 }
 
-const playOsc = (freq) => {
-  osc.connect(ctxAudio.destination);
-  osc.frequency.value = freq;
-}
-
-const animateLeds = (bool) => {
-  Array.from(document.querySelectorAll('.ledCard'))
+function animateLeds(bool) {
+    Array.from(document.querySelectorAll('.ledCard'))
     .map(led => {
-      if (!bool) {
-        led.classList.remove('led_active');
-      }
-      else {
-        led.classList.add('led_active');
-      }
+        if (!bool) {
+            led.classList.remove('led_active');
+        }
+        else {
+            led.classList.add('led_active');
+        }
     });
 }
 
-const animateKeys = (arrKey, bool) => {
-  let keysFront = document.querySelectorAll('.keyNorm');
-
-  if(!bool) {
-    keysFront[arrKey].classList.remove('key_active');
-  }
-  else {
-    keysFront[arrKey].classList.add('key_active');
-  }
+function animateKeys(arrKey, bool) {
+    let keysFront = document.querySelectorAll('.keyNorm');
+    
+    if(!bool) {
+        keysFront[arrKey].classList.remove('key_active');
+    }
+    else {
+        keysFront[arrKey].classList.add('key_active');
+    }
 }
 
+// MAIN
 document.addEventListener("DOMContentLoaded", () => { 
-  createOsc(waves.sawtooth);
-
-  document.addEventListener('keydown', e => {
-    com.map(key => {
-      if (e.keyCode === key.keycode) {
-        playOsc(key.freq);
-        animateLeds(true);
-        animateKeys(key.locDom, true);
-      }
+    let {ctxAudio, osc} = createOsc(waves.sawtooth);
+    
+    document.addEventListener('keydown', e => {
+        C64.map(key => {
+            if (e.keyCode === key.keycode) {
+                playOsc(ctxAudio, osc, key.freq);
+                animateLeds(true);
+                animateKeys(key.locDom, true);
+            }
+        });
     });
-  });
-  
-  document.addEventListener('keyup', e => {
-    com.map(key => {
-      if (e.keyCode === key.keycode) {
-        osc.disconnect(ctxAudio.destination);
-        animateLeds(false);
-        animateKeys(key.locDom, false);
-      }
+    
+    document.addEventListener('keyup', e => {
+        C64.map(key => {
+            if (e.keyCode === key.keycode) {
+                osc.disconnect(ctxAudio.destination);
+                animateLeds(false);
+                animateKeys(key.locDom, false);
+            }
+        });
     });
-  });
 });
