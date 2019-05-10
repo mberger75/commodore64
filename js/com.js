@@ -1,5 +1,4 @@
-const com = 
-[
+const com = [
     { name: 'Q', prop: 'osc', keycode: 81, locDom: 17, freq: 27.5 },
     { name: 'W', prop: 'osc', keycode: 87, locDom: 18, freq: 29.1353 },
     { name: 'E', prop: 'osc', keycode: 69, locDom: 19, freq: 30.8677 },
@@ -26,8 +25,4 @@ const com =
     { name: 'B', prop: 'osc', keycode: 66, locDom: 52, freq: 103.826 },
     { name: 'N', prop: 'osc', keycode: 78, locDom: 53, freq: 110 },
     { name: 'M', prop: 'osc', keycode: 77, locDom: 54, freq: 116.541 },
-
 ]
-
-
-

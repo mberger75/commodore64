@@ -1,14 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Nova+Square');
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
 
-html { height: 100%; }
+html { 
+  height: 100%; 
+}
+
 body {
   background: radial-gradient(circle, #92f5ff, #3fd0f5, #00a9eb, #007fdb, #0a52be);
 }
 
 .container {
-  background: 
-    linear-gradient(to top, #D6CEB8, #D2CAB4 50%, #E6E3D9 73%, #f4f1e8 75%);
+  background: linear-gradient(to top, #D6CEB8, #D2CAB4 50%, #E6E3D9 73%, #f4f1e8 75%);
   width: 1100px;
   height: 600px;
   position: absolute;
@@ -90,12 +92,16 @@ body {
 }
 
 @keyframes ledCard {
-    from { background-color: #24e0ff; }
-    50% { 
-      background-color: #00778b; 
-      box-shadow: rgba(0, 0, 0, 0.1) 0 -1px 7px 1px, inset #143696 0 -1px 10px, #143696 0 2px 0; 
-    }
-    to { background-color: #24e0ff; }
+  from {
+    background-color: #24e0ff;
+  }
+  50% {
+    background-color: #00778b;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 -1px 7px 1px, inset #143696 0 -1px 10px, #143696 0 2px 0; 
+  }
+  to {
+    background-color: #24e0ff;
+  }
 }
 
 
@@ -116,8 +122,7 @@ body {
   top: -55px;
   left: 50px;
   padding: 9px;
-  background: 
-    linear-gradient(165deg, #D4D8E3, #8C93A2);
+  background: linear-gradient(165deg, #D4D8E3, #8C93A2);
   width: 260px;
   height: 20px;
   border-radius: 80px;
@@ -246,14 +251,15 @@ body {
 }
 
 @keyframes blink {
-    from { background-image: 
-          radial-gradient(circle, #ffbebe, #ff9b98, #ff766f, #f84f44, #eb1212);
+    from { 
+      background-image: radial-gradient(circle, #ffbebe, #ff9b98, #ff766f, #f84f44, #eb1212);
     }
-    50% { background-color: #A00;
-        box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 3px 1px, inset #441313 0 -1px 13px, rgba(255, 0, 0, 0.3) 0 0px 0px;
+    50% { 
+      background-color: #A00;
+      box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 3px 1px, inset #441313 0 -1px 13px, rgba(255, 0, 0, 0.3) 0 0px 0px;
     }
-    to { background-image: 
-      radial-gradient(circle, #ffbebe, #ff9b98, #ff766f, #f84f44, #eb1212); 
+    to { 
+      background-image: radial-gradient(circle, #ffbebe, #ff9b98, #ff766f, #f84f44, #eb1212); 
     }
 }
 
@@ -301,8 +307,7 @@ body {
   text-align: center;
   font-size: 12px;
   left: 1px;
-  background: 
-    linear-gradient(135deg, #000000, #8A888C);
+  background: linear-gradient(135deg, #000000, #8A888C);
   color: #ffffff;
   width: 50px;
   height: 40px;
@@ -315,8 +320,7 @@ body {
 }
 
 .key_active { 
-  background: 
-    radial-gradient(circle, #4a494b, #393739, #282727, #181717, #000000);
+  background: radial-gradient(circle, #4a494b, #393739, #282727, #181717, #000000);
   transition: 0.1s;
 }
 
@@ -334,9 +338,8 @@ body {
   width: 485px;
   top: 23px;
   left: 173px;
-  background: 
-    linear-gradient(45deg, #000000, #8A888C);
-    box-shadow: -3px 0px 13px 3px #000000;
+  background: linear-gradient(45deg, #000000, #8A888C);
+  box-shadow: -3px 0px 13px 3px #000000;
 }
 
 .keys_macro {
@@ -349,10 +352,8 @@ body {
 
 .key_long_macro {
   width: 75px;
-  background-image: 
-    linear-gradient(to left, #8d897d, #807d70, #747163, #686556, #5c594a);
+  background-image: linear-gradient(to left, #8d897d, #807d70, #747163, #686556, #5c594a);
   border-bottom: 15px inset #282827;
   border-left: 10px inset #4F4C44; 
   border-right: 10px inset #4F4C44; 
 }
-
