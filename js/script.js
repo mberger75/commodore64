@@ -14,50 +14,50 @@ function playOsc(ctxAudio, osc, freq) {
     osc.frequency.value = freq;
 }
 
-function animateLeds(bool) {
+function animate(arrKey, bool) {
+    let keysFront = document.querySelectorAll('.keyNorm');
+
     Array.from(document.querySelectorAll('.ledCard'))
     .map(led => {
         if (!bool) {
             led.classList.remove('led_active');
+            keysFront[arrKey].classList.remove('key_active');
         }
         else {
             led.classList.add('led_active');
+            keysFront[arrKey].classList.add('key_active');
         }
     });
 }
 
-function animateKeys(arrKey, bool) {
-    let keysFront = document.querySelectorAll('.keyNorm');
-    
-    if(!bool) {
-        keysFront[arrKey].classList.remove('key_active');
-    }
-    else {
-        keysFront[arrKey].classList.add('key_active');
-    }
-}
-
 // MAIN
-document.addEventListener("DOMContentLoaded", () => { 
-    let {ctxAudio, osc} = createOsc(waves.sawtooth);
-    
-    document.addEventListener('keydown', e => {
-        C64.map(key => {
-            if (e.keyCode === key.keycode) {
-                playOsc(ctxAudio, osc, key.freq);
-                animateLeds(true);
-                animateKeys(key.locDom, true);
-            }
-        });
-    });
-    
-    document.addEventListener('keyup', e => {
-        C64.map(key => {
-            if (e.keyCode === key.keycode) {
-                osc.disconnect(ctxAudio.destination);
-                animateLeds(false);
-                animateKeys(key.locDom, false);
-            }
-        });
-    });
+document.addEventListener('DOMContentLoaded', () => {
+
+    let {ctxAudio, osc} = createOsc(waves.triangle);
+    let keyPressed = {};
+
+    onkeydown = onkeyup = e => {
+        keyPressed[e.keyCode] = e.type === 'keydown';
+
+        if (keyPressed[e.keyCode] === true) {
+            C64.map(key => {
+                if (e.keyCode === key.keycode) {
+                    animate(key.locDom, true);
+                    playOsc(ctxAudio, osc, key.freq);
+                }
+            });
+        }
+        else {
+            C64.map(key => {
+                if (e.keyCode === key.keycode) {
+                    animate(key.locDom, false);
+                    if (ctxAudio.destination) {
+                        osc.disconnect(ctxAudio.destination);
+                    }
+                }
+            });
+        }
+    }
+
+    // setInterval(() => console.log(pressedKeys), 100);
 });
